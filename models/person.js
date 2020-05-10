@@ -4,16 +4,6 @@ const uniqueValidator = require('mongoose-unique-validator');
 mongoose.set('useFindAndModify', false)
 mongoose.set('useCreateIndex', true);
 
-
-// if ( process.argv.length<3 ) {
-//   console.log('give password as argument')
-//   process.exit(1)
-// }
-
-// const password = process.argv[2]
-// const userName = process.argv[3]
-// const userNumber = process.argv[4]
-
 const url = process.env.MONGODB_URI
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
