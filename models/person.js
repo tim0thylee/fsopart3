@@ -1,6 +1,8 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator');
 mongoose.set('useFindAndModify', false)
+mongoose.set('useCreateIndex', true);
 
 
 // if ( process.argv.length<3 ) {
@@ -23,9 +25,18 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
      })
 
 const personSchema = new mongoose.Schema({
-  name: String,
-  number: String,
+  name: {
+      type:String, 
+      required: true, 
+      unique: true,
+      minlength: 3
+  },
+  number:{ 
+      type: String,
+      minlength: 8
+  },
 })
+personSchema.plugin(uniqueValidator);
 
 // since id is an object, we want to guarantee the value is a string. 
 // we also don't want to send back __V. 
